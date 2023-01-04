@@ -6,8 +6,12 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'is_superuser', 'password', 'username', 'email', 'first_name', 'last_name', 'is_adm']
         read_only_fields = ['id', 'is_superuser']
-        extra_kwargs = {'password': {'write_only': True}}
-
+        extra_kwargs = {
+            "password": {"write_only": True},
+            "is_adm": {
+                "default": False,
+            },
+        }
 
     def create(self, validated_data: dict) -> User:
         if validated_data['is_adm']: 

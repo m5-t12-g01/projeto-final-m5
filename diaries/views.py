@@ -12,10 +12,10 @@ class DiaryView(generics.ListCreateAPIView):
     serializer_class = DiarySerializer
 
     def get_queryset(self):
-        return Diary.objects.filter(user_id = self.request.user.id)
+        return Diary.objects.filter(user_id=self.request.user.id)
 
     def perform_create(self, serializer):
-        serializer.save(user = self.request.user)
+        serializer.save(user=self.request.user)
     
         
 class DiaryDetailView(generics.RetrieveUpdateDestroyAPIView):

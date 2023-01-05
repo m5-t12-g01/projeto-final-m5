@@ -7,5 +7,3 @@ class IsPermissionDiary(permissions.BasePermission):
         if request.user.is_authenticated and obj.user == request.user:
             return True
         return False
-
-        

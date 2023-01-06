@@ -28,7 +28,7 @@ class NoteView(ListCreateAPIView):
         serializer.save(diary_id=self.kwargs.get("pk"))
 
 
-class NoteDetailsView(RetrieveUpdateDestroyAPIView):
+class NoteDetailView(RetrieveUpdateDestroyAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsOwnerNote]
 

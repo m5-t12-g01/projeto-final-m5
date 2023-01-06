@@ -4,6 +4,7 @@ from .serializers import NoteSerializer
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.generics import ListCreateAPIView
 from rest_framework.generics import RetrieveUpdateDestroyAPIView
+from rest_framework.permissions import IsAuthenticated
 from diaries.permissions import IsPermissionDiary
 from notes.permissions import IsOwnerNote
 from django.shortcuts import get_object_or_404
@@ -30,7 +31,7 @@ class NoteView(ListCreateAPIView):
 
 class NoteDetailsView(RetrieveUpdateDestroyAPIView):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsOwnerNote]
+    permission_classes = [IsAuthenticated, IsOwnerNote]
 
     serializer_class = NoteSerializer
     queryset = Note.objects.all()

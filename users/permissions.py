@@ -19,3 +19,5 @@ class UserPermissions(permissions.BasePermission):
             request.user.is_superuser or obj == request.user
             
             )
+
+        

@@ -20,7 +20,7 @@ class NoteView(ListCreateAPIView):
 
         route_parameter = self.request.GET.get("priority")
 
-        diary_id = self.kwargs["pk"]
+        diary_id = self.kwargs["diary_id"]
         diary_obj = get_object_or_404(Diary, pk=diary_id)
         self.check_object_permissions(self.request, diary_obj)
 
@@ -34,10 +34,10 @@ class NoteView(ListCreateAPIView):
         return Note.objects.all().filter(diary=diary_obj).order_by("-priority")
 
     def perform_create(self, serializer):
-        diary_id = self.kwargs["pk"]
+        diary_id = self.kwargs["diary_id"]
         diary_obj = get_object_or_404(Diary, pk=diary_id)
         self.check_object_permissions(self.request, diary_obj)
-        serializer.save(diary_id=self.kwargs.get("pk"))
+        serializer.save(diary_id=self.kwargs.get("diary_id"))
 
 
 class NoteDetailView(RetrieveUpdateDestroyAPIView):
@@ -47,4 +47,4 @@ class NoteDetailView(RetrieveUpdateDestroyAPIView):
     serializer_class = NoteSerializer
     queryset = Note.objects.all()
 
-    lookup_url_kwarg = "pk"
+    lookup_url_kwarg = "note_id"

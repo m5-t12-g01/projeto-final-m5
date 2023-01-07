@@ -1,11 +1,6 @@
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 import uuid
-
-
-class NotePriority(models.TextChoices):
-    HIGH = "High"
-    AVERAGE = "Average"
-    LOW = "Low"
 
 
 class Note(models.Model):
@@ -20,11 +15,12 @@ class Note(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    priority = models.CharField(
-        max_length=20,
-        null=True,
-        choices=NotePriority.choices,
-        default=NotePriority.AVERAGE,
+    priority = models.PositiveIntegerField(
+        validators=[
+            MinValueValidator(1),
+            MaxValueValidator(3),
+        ],
+        default=2,
     )
 
     diary = models.ForeignKey(

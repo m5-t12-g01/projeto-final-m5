@@ -10,7 +10,7 @@ class UserView(generics.ListCreateAPIView):
     permission_classes = [IsSuperUser]
 
     serializer_class = UserSerializer
-    queryset = User.objects.get_queryset().order_by('id')  # Alterei por causa de um warning no teste quando User.objects.all() é usado
+    queryset = User.objects.get_queryset().order_by('id')
 
 
 class UserDetailView(generics.RetrieveUpdateDestroyAPIView):

@@ -7,4 +7,8 @@ class Diary(models.Model):
     name = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    user = models.ForeignKey('users.User', on_delete=models.CASCADE, related_name='diaries')
+    user = models.ForeignKey(
+        "users.User",
+        on_delete=models.CASCADE,
+        related_name="diaries",
+    )

@@ -17,7 +17,7 @@ class LoginViewTest(APITestCase):
             "is_adm": "True"
         }
 
-        User.objects.create_user(**user_data) # Criação de usuário
+        User.objects.create_superuser(**user_data) # Criação de usuário
 
         login_data = {
             "username": "maite_kenzie",
@@ -33,7 +33,6 @@ class LoginViewTest(APITestCase):
         returned_keys = set(response.json().keys())
 
         msg = f"Verifique se os tokens de acesso e refresh estão sendo retornados corretamente na rota {self.base_url}"
-        
 
         self.assertSetEqual(expected_keys, returned_keys, msg)
 
@@ -43,8 +42,7 @@ class LoginViewTest(APITestCase):
 
         returned_status_code = response.status_code
 
-        msg = f"Verifique se o status code retornado é POST - {expected_status_code}"
-        
+        msg = f"Verifique se o status code retornado é {expected_status_code}"
 
         self.assertEqual(expected_status_code, returned_status_code, msg)
 
@@ -72,7 +70,7 @@ class LoginViewTest(APITestCase):
 
         returned_status_code = response.status_code
 
-        msg = f"Verifique se o status code retornado é POST - {expected_status_code}"
+        msg = f"Verifique se o status code retornado é {expected_status_code}"
         
 
         self.assertEqual(expected_status_code, returned_status_code, msg)
@@ -100,8 +98,7 @@ class LoginViewTest(APITestCase):
 
         returned_status_code = response.status_code
 
-        msg = f"Verifique se o status code retornado é POST - {expected_status_code}"
-    
+        msg = f"Verifique se o status code retornado é {expected_status_code}"
 
         self.assertEqual(expected_status_code, returned_status_code, msg)
     

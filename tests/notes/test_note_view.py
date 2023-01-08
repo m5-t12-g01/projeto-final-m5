@@ -3,7 +3,7 @@ from rest_framework.views import status
 from users.models import User
 from diaries.models import Diary
 
-class DiaryDetailViewTest(APITestCase):
+class NoteViewTest(APITestCase):
     @classmethod
     def setUpTestData(cls):
 
@@ -43,8 +43,8 @@ class DiaryDetailViewTest(APITestCase):
 
     def test_create_note_with_valid_token(self):
         note_data = {
-            "title": "Nota da Maite",
-            "description": "Descrição da nota da Maite",
+            "title": "Anotação da Maite",
+            "description": "Descrição da anotação da Maite",
             "priority": 1 
         }
 
@@ -77,8 +77,8 @@ class DiaryDetailViewTest(APITestCase):
 
     def test_create_note_for_another_user(self):
         note_data = {
-            "title": "Nota da Catarina",
-            "description": "Descrição da nota da Catarina",
+            "title": "Anotação da Catarina",
+            "description": "Descrição da anotação da Catarina",
             "priority": 1 
         }
 
@@ -111,8 +111,8 @@ class DiaryDetailViewTest(APITestCase):
 
     def test_create_note_without_authentication(self):
         note_data = {
-            "title": "Nota da Maite",
-            "description": "Descrição da nota da Maite",
+            "title": "Anotação da Maite",
+            "description": "Descrição da anotação da Maite",
             "priority": 1 
         }
 
@@ -140,7 +140,7 @@ class DiaryDetailViewTest(APITestCase):
 
     def test_create_note_with_missing_data(self):
         note_data = {
-            "title": "Nota da Maite",
+            "title": "Anotação da Maite",
         }
 
         login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
@@ -172,14 +172,14 @@ class DiaryDetailViewTest(APITestCase):
 
     def test_listing_notes_with_valid_token(self):
         first_note_data = {
-            "title": "Primeiira Nota da Maite",
-            "description": "Descrição da primeira nota da Maite",
+            "title": "Primeiira Anotação da Maite",
+            "description": "Descrição da primeira anotação da Maite",
             "priority": 1 
         }
 
         second_note_data = {
-            "title": "Segunda Nota da Maite",
-            "description": "Descrição da segunda nota da Maite",
+            "title": "Segunda Anotação da Maite",
+            "description": "Descrição da segunda anotação da Maite",
             "priority": 3 
         }
 
@@ -215,14 +215,14 @@ class DiaryDetailViewTest(APITestCase):
 
     def test_listing_notes_from_another_user(self):
         first_note_data = {
-            "title": "Primeira Nota da Catarina",
-            "description": "Descrição da primeira nota da Catarina",
+            "title": "Primeira Anotação da Catarina",
+            "description": "Descrição da primeira anotação da Catarina",
             "priority": 1 
         }
 
         second_note_data = {
-            "title": "Segunda Nota da Catarina",
-            "description": "Descrição da segunda nota da Catarina",
+            "title": "Segunda Anotação da Catarina",
+            "description": "Descrição da segunda anotação da Catarina",
             "priority": 3 
         }
 

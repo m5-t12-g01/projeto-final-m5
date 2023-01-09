@@ -17,10 +17,23 @@ https://drive.google.com/file/d/14o99A-noRLrae2SnxDmlVi9RNiUNdDB1/view
 ```
 
 ``Documentação (swagger):``
+```
+https://kenzienotes.onrender.com/docs/swagger/
+```
 
 ``Deploy:``
 
-Sua url base é
+Sua url base é 
+
+```
+https://kenzienotes.onrender.com/
+```
+
+## Testes:
+Foram implementados testes de todas as views da aplicação, para rodar digite o seguinte comando no terminal:
+```
+python manage.py test
+```
 
 ## Endpoints:
 

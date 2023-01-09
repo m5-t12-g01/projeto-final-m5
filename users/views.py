@@ -3,6 +3,7 @@ from .serializers import UserSerializer
 from rest_framework import generics
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from .permissions import IsSuperUser, UserPermissions
+from drf_spectacular.utils import extend_schema
 
 
 class UserView(generics.ListCreateAPIView):
@@ -10,9 +11,13 @@ class UserView(generics.ListCreateAPIView):
     permission_classes = [IsSuperUser]
 
     serializer_class = UserSerializer
-    queryset = User.objects.get_queryset().order_by('id')
+    queryset = User.objects.get_queryset().order_by("id")
 
 
+@extend_schema(
+    methods=["PUT"],
+    exclude=True,
+)
 class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [UserPermissions]
@@ -20,4 +25,4 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
 
-    lookup_url_kwarg = 'user_id'
+    lookup_url_kwarg = "user_id"

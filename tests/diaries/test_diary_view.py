@@ -26,12 +26,12 @@ class DiaryViewTest(APITestCase):
         cls.super_user = User.objects.create_superuser(**super_user_data)
         cls.common_user = User.objects.create_user(**common_user_data)
 
-        cls.base_url = "/api/diaries/"
+        cls.base_url = "/diaries/"
 
     def test_create_diary_with_valid_token(self):
         diary_data = {"name": "Diário da Maite"}
 
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)
@@ -86,7 +86,7 @@ class DiaryViewTest(APITestCase):
     def test_create_diary_with_missing_data(self):
         diary_data = {}
 
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)
@@ -117,7 +117,7 @@ class DiaryViewTest(APITestCase):
         first_diary_data = {"name": "Primeiro Diário da Maite"}
         second_diary_data = {"name": "Segundo Diário da Maite"}
 
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)

@@ -38,12 +38,12 @@ class DiaryDetailViewTest(APITestCase):
         cls.super_diary = Diary.objects.create(**super_diary_data, user=cls.super_user)
         cls.common_diary = Diary.objects.create(**common_diary_data, user=cls.common_user)
 
-        cls.base_url = "/api/diaries/"
-        cls.admin_url = f"/api/diaries/{cls.super_diary.id}/"
-        cls.common_url = f"/api/diaries/{cls.common_diary.id}/"
+        cls.base_url = "/diaries/"
+        cls.admin_url = f"/diaries/{cls.super_diary.id}/"
+        cls.common_url = f"/diaries/{cls.common_diary.id}/"
 
     def test_retrieve_owner_diary(self):
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)
@@ -71,7 +71,7 @@ class DiaryDetailViewTest(APITestCase):
         self.assertEqual(expected_status_code, returned_status_code, msg)
 
     def test_retrieve_another_user_diary(self):
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)
@@ -122,7 +122,7 @@ class DiaryDetailViewTest(APITestCase):
         self.assertEqual(expected_status_code, returned_status_code, msg)
 
     def test_retrieve_diary_with_invalid_id(self):
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)
@@ -152,7 +152,7 @@ class DiaryDetailViewTest(APITestCase):
     def test_update_owner_diary(self):
         update_data = {"name": "Diário Editado"}
 
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)
@@ -182,7 +182,7 @@ class DiaryDetailViewTest(APITestCase):
     def test_update_another_user_diary(self):
         update_data = {"name": "Diário Editado"}
 
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)
@@ -237,7 +237,7 @@ class DiaryDetailViewTest(APITestCase):
     def test_update_diary_with_invalid_id(self):
         update_data = {"name": "Diário Editado"}
 
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)
@@ -265,7 +265,7 @@ class DiaryDetailViewTest(APITestCase):
         self.assertEqual(expected_status_code, returned_status_code, msg)    
 
     def test_delete_owner_diary(self):
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)
@@ -283,7 +283,7 @@ class DiaryDetailViewTest(APITestCase):
         self.assertEqual(expected_status_code, returned_status_code, msg)
 
     def test_delete_another_user_diary(self):
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)
@@ -334,7 +334,7 @@ class DiaryDetailViewTest(APITestCase):
         self.assertEqual(expected_status_code, returned_status_code, msg)
 
     def test_delete_diary_with_invalid_id(self):
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)

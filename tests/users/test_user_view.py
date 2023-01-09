@@ -4,7 +4,7 @@ from rest_framework.views import status
 class UserViewTest(APITestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.base_url = "/api/users/"
+        cls.base_url = "/users/"
 
     def test_admin_user_creation(self):
         user_data = {
@@ -156,7 +156,7 @@ class UserViewTest(APITestCase):
 
         super_user = self.client.post(self.base_url, data=super_user_data, format="json")
         common_user = self.client.post(self.base_url, data=common_user_data, format="json")
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + token)
@@ -203,7 +203,7 @@ class UserViewTest(APITestCase):
 
         super_user = self.client.post(self.base_url, data=super_user_data, format="json")
         common_user = self.client.post(self.base_url, data=common_user_data, format="json")
-        login_response = self.client.post("/api/login/", {"username": "catarina_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "catarina_kenzie", "password": "1234"}, format="json")
 
         token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + token)

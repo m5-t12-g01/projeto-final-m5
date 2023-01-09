@@ -5,7 +5,7 @@ from users.models import User
 class LoginViewTest(APITestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.base_url = "/api/login/"
+        cls.base_url = "/login/"
 
     def test_login_success(self):
         user_data = {

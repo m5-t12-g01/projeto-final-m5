@@ -54,12 +54,12 @@ class NoteDetailViewTest(APITestCase):
         cls.super_note = Note.objects.create(**super_note_data, diary=cls.super_diary)
         cls.common_note = Note.objects.create(**common_note_data, diary=cls.common_diary)
 
-        cls.base_url = "/api/notes/"
-        cls.admin_url = f"/api/notes/{cls.super_note.id}/"
-        cls.common_url = f"/api/notes/{cls.common_note.id}/"
+        cls.base_url = "/notes/"
+        cls.admin_url = f"/notes/{cls.super_note.id}/"
+        cls.common_url = f"/notes/{cls.common_note.id}/"
 
     def test_retrieve_owner_note(self):
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)
@@ -87,7 +87,7 @@ class NoteDetailViewTest(APITestCase):
         self.assertEqual(expected_status_code, returned_status_code, msg)
 
     def test_retrieve_another_user_note(self):
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)
@@ -138,7 +138,7 @@ class NoteDetailViewTest(APITestCase):
         self.assertEqual(expected_status_code, returned_status_code, msg)
 
     def test_retrieve_note_with_invalid_id(self):
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)
@@ -168,7 +168,7 @@ class NoteDetailViewTest(APITestCase):
     def test_update_owner_note(self):
         update_data = {"title": "Anotação Editada"}
 
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)
@@ -198,7 +198,7 @@ class NoteDetailViewTest(APITestCase):
     def test_update_another_user_note(self):
         update_data = {"title": "Anotação Editada"}
 
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)
@@ -253,7 +253,7 @@ class NoteDetailViewTest(APITestCase):
     def test_update_note_with_invalid_id(self):
         update_data = {"title": "Anotação Editada"}
 
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)
@@ -281,7 +281,7 @@ class NoteDetailViewTest(APITestCase):
         self.assertEqual(expected_status_code, returned_status_code, msg)
 
     def test_delete_owner_note(self):
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)
@@ -299,7 +299,7 @@ class NoteDetailViewTest(APITestCase):
         self.assertEqual(expected_status_code, returned_status_code, msg)
 
     def test_delete_another_user_note(self):
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)
@@ -350,7 +350,7 @@ class NoteDetailViewTest(APITestCase):
         self.assertEqual(expected_status_code, returned_status_code, msg)
 
     def test_delete_note_with_invalid_id(self):
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)

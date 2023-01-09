@@ -26,12 +26,12 @@ class UserDetailViewTest(APITestCase):
         cls.super_user = User.objects.create_superuser(**super_user_data)
         cls.common_user = User.objects.create_user(**common_user_data)
 
-        cls.base_url = "/api/users/"
-        cls.admin_url = f"/api/users/{cls.super_user.id}/"
-        cls.common_url = f"/api/users/{cls.common_user.id}/"
+        cls.base_url = "/users/"
+        cls.admin_url = f"/users/{cls.super_user.id}/"
+        cls.common_url = f"/users/{cls.common_user.id}/"
 
     def test_retrieve_another_user_data_with_admin_token(self):
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)
@@ -59,7 +59,7 @@ class UserDetailViewTest(APITestCase):
         self.assertEqual(expected_status_code, returned_status_code, msg)
 
     def test_retrieve_another_user_data_with_common_token(self):
-        login_response = self.client.post("/api/login/", {"username": "catarina_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "catarina_kenzie", "password": "1234"}, format="json")
 
         common_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + common_token)
@@ -87,7 +87,7 @@ class UserDetailViewTest(APITestCase):
         self.assertEqual(expected_status_code, returned_status_code, msg)
 
     def test_retrieve_owner_user_data_with_common_token(self):
-        login_response = self.client.post("/api/login/", {"username": "catarina_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "catarina_kenzie", "password": "1234"}, format="json")
 
         common_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + common_token)
@@ -138,7 +138,7 @@ class UserDetailViewTest(APITestCase):
         self.assertEqual(expected_status_code, returned_status_code, msg)
 
     def test_retrieve_user_with_invalid_id(self):
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)
@@ -168,7 +168,7 @@ class UserDetailViewTest(APITestCase):
     def test_update_another_user_data_with_admin_token(self):
         update_data = {"username": "catarina_editada"}
 
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)
@@ -198,7 +198,7 @@ class UserDetailViewTest(APITestCase):
     def test_update_another_user_data_with_common_token(self):
         update_data = {"username": "maite_editada"}
 
-        login_response = self.client.post("/api/login/", {"username": "catarina_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "catarina_kenzie", "password": "1234"}, format="json")
 
         common_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + common_token)
@@ -228,7 +228,7 @@ class UserDetailViewTest(APITestCase):
     def test_update_owner_user_data_with_common_token(self):
         update_data = {"username": "catarina_editada"}
 
-        login_response = self.client.post("/api/login/", {"username": "catarina_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "catarina_kenzie", "password": "1234"}, format="json")
 
         common_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + common_token)
@@ -283,7 +283,7 @@ class UserDetailViewTest(APITestCase):
     def test_update_user_with_invalid_id(self):
         update_data = {"username": "catarina_editada"}
 
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)
@@ -311,7 +311,7 @@ class UserDetailViewTest(APITestCase):
         self.assertEqual(expected_status_code, returned_status_code, msg)
 
     def test_delete_another_user_data_with_admin_token(self):
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)
@@ -329,7 +329,7 @@ class UserDetailViewTest(APITestCase):
         self.assertEqual(expected_status_code, returned_status_code, msg)
 
     def test_delete_another_user_data_with_common_token(self):
-        login_response = self.client.post("/api/login/", {"username": "catarina_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "catarina_kenzie", "password": "1234"}, format="json")
 
         common_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + common_token)
@@ -357,7 +357,7 @@ class UserDetailViewTest(APITestCase):
         self.assertEqual(expected_status_code, returned_status_code, msg)
 
     def test_delete_owner_user_data_with_common_token(self):
-        login_response = self.client.post("/api/login/", {"username": "catarina_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "catarina_kenzie", "password": "1234"}, format="json")
 
         common_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + common_token)
@@ -398,7 +398,7 @@ class UserDetailViewTest(APITestCase):
         self.assertEqual(expected_status_code, returned_status_code, msg)
 
     def test_delete_user_with_invalid_id(self):
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)

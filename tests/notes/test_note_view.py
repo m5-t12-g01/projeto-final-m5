@@ -38,8 +38,8 @@ class NoteViewTest(APITestCase):
         cls.super_diary = Diary.objects.create(**super_diary_data, user=cls.super_user)
         cls.common_diary = Diary.objects.create(**common_diary_data, user=cls.common_user)
 
-        cls.admin_url = f"/api/diaries/{cls.super_diary.id}/notes/"
-        cls.common_url = f"/api/diaries/{cls.common_diary.id}/notes/"
+        cls.admin_url = f"/diaries/{cls.super_diary.id}/notes/"
+        cls.common_url = f"/diaries/{cls.common_diary.id}/notes/"
 
     def test_create_note_with_valid_token(self):
         note_data = {
@@ -48,7 +48,7 @@ class NoteViewTest(APITestCase):
             "priority": 1 
         }
 
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)
@@ -82,7 +82,7 @@ class NoteViewTest(APITestCase):
             "priority": 1 
         }
 
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)
@@ -143,7 +143,7 @@ class NoteViewTest(APITestCase):
             "title": "Anotação da Maite",
         }
 
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)
@@ -183,7 +183,7 @@ class NoteViewTest(APITestCase):
             "priority": 3 
         }
 
-        login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)
@@ -226,7 +226,7 @@ class NoteViewTest(APITestCase):
             "priority": 3 
         }
 
-        common_login_response = self.client.post("/api/login/", {"username": "catarina_kenzie", "password": "1234"}, format="json")
+        common_login_response = self.client.post("/login/", {"username": "catarina_kenzie", "password": "1234"}, format="json")
 
         common_token = common_login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + common_token)
@@ -234,7 +234,7 @@ class NoteViewTest(APITestCase):
         first_common_note = self.client.post(self.common_url, data=first_note_data, format="json") # Usuário comum cria as anotações
         second_common_note = self.client.post(self.common_url, data=second_note_data, format="json")
 
-        admin_login_response = self.client.post("/api/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
+        admin_login_response = self.client.post("/login/", {"username": "maite_kenzie", "password": "1234"}, format="json")
 
         admin_token = admin_login_response.json()["access"]
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + admin_token)

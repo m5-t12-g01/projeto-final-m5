@@ -8,6 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from diaries.permissions import IsPermissionDiary
 from notes.permissions import IsOwnerNote
 from django.shortcuts import get_object_or_404
+from drf_spectacular.utils import extend_schema
 
 
 class NoteView(ListCreateAPIView):
@@ -40,6 +41,10 @@ class NoteView(ListCreateAPIView):
         serializer.save(diary_id=self.kwargs.get("diary_id"))
 
 
+@extend_schema(
+    methods=["PUT"],
+    exclude=True,
+)
 class NoteDetailView(RetrieveUpdateDestroyAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated, IsOwnerNote]
